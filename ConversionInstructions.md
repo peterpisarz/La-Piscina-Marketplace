@@ -45,6 +45,10 @@ npm install
 11) Make sure the app works
 npm run start
 
+13) Manually update html
+Open Punks
+Make sure the date matches your .env file
+
 12) create .env
 DEPLOYER_PRIVATE_KEY=""
 INFURA_API_KEY=""
