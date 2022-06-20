@@ -62,7 +62,7 @@ MAX_SUPPLY= // how many pictures are you posting?
 IPFS_IMAGE_METADATA_CID=""
 IPFS_HIDDEN_IMAGE_METADATA_CID=""
 
-NFT_MINT_DATE="Apr 18, 2022 22:00:00" // Update this date
+NFT_MINT_DATE="Apr 18, 2022 22:00:00" // Update this date (resource: https://www.epochconverter.com/)
 
 13) Replace Social Media Links, Instagram, Twitter
 
