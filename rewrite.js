@@ -19,6 +19,7 @@ const NewSpace = "Show Time"
 const newContract = "showTime"
 const setContract = "setShowTime"
 const newPackage = "show_time"
+const newDash = "show-time"
 
 // PATHS TO FILES NEEDING VARIABLE REWRITE
 const contract = path.join(basePath, "src/contracts/OpenPunks.sol")
@@ -27,6 +28,7 @@ const originalTest = path.join(basePath, "test/OpenPunks.test.js")
 const newtest = path.join(basePath, "test/", NewContract + ".test.js")
 const deployContract = path.join(basePath, "migrations/2_deploy_contracts.js")
 const packagejson = path.join(basePath, "package.json")
+const configjson = path.join(basePath, "src/config.json")
 
 // CONSOLE LOGS
 console.log(contract + " >>> " + newcontract)
@@ -82,6 +84,16 @@ fs.readFile(packagejson, 'utf8', function (err,data) {
     .replace(/"setOpenPunks"/g, setContract);
 
  fs.writeFile(packagejson, formatted, 'utf8', function (err) {
+    if (err) return console.log(err);
+ });
+});
+
+// Replace config.json
+fs.readFile(configjson, 'utf8', function (err,data) {
+
+  var formatted = data.replace(/open-punks/g, newDash)
+
+ fs.writeFile(configjson, formatted, 'utf8', function (err) {
     if (err) return console.log(err);
  });
 });
