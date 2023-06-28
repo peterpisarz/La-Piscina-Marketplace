@@ -14,12 +14,12 @@ import '../App.css'
 import Navbar from './Navbar'
 
 // Import ABI + Config
-import OpenPunks from '../abis/OpenPunks.json'
+import LaPiscina from '../abis/LaPiscina.json'
 import config from '../config.json'
 
 function App() {
 	const [web3, setWeb3] = useState(null)
-	const [openPunks, setOpenPunks] = useState(null)
+	const [laPiscina, setLaPiscina] = useState(null)
 
 	const [supplyAvailable, setSupplyAvailable] = useState(0)
 
@@ -43,19 +43,19 @@ function App() {
 	const loadBlockchainData = async (_web3, _account, _networkId) => {
 		// Fetch Contract, Data, etc.
 		try {
-			const openPunks = new _web3.eth.Contract(OpenPunks.abi, OpenPunks.networks[_networkId].address)
-			setOpenPunks(openPunks)
+			const laPiscina = new _web3.eth.Contract(LaPiscina.abi, LaPiscina.networks[_networkId].address)
+			setLaPiscina(laPiscina)
 
-			const maxSupply = await openPunks.methods.maxSupply().call()
-			const totalSupply = await openPunks.methods.totalSupply().call()
+			const maxSupply = await laPiscina.methods.maxSupply().call()
+			const totalSupply = await laPiscina.methods.totalSupply().call()
 			setSupplyAvailable(maxSupply - totalSupply)
 
-			const allowMintingAfter = await openPunks.methods.allowMintingAfter().call()
-			const timeDeployed = await openPunks.methods.timeDeployed().call()
+			const allowMintingAfter = await laPiscina.methods.allowMintingAfter().call()
+			const timeDeployed = await laPiscina.methods.timeDeployed().call()
 			setRevealTime((Number(timeDeployed) + Number(allowMintingAfter)).toString() + '000')
 
 			if (_account) {
-				const ownerOf = await openPunks.methods.walletOfOwner(_account).call()
+				const ownerOf = await laPiscina.methods.walletOfOwner(_account).call()
 				setOwnerOf(ownerOf)
 			} else {
 				setOwnerOf([])
@@ -124,17 +124,17 @@ function App() {
 		}
 
 		// Mint NFT
-		if (openPunks && account) {
+		if (laPiscina && account) {
 			setIsMinting(true)
 			setIsError(false)
 
-			await openPunks.methods.mint(1).send({ from: account, value: 0 })
+			await laPiscina.methods.mint(1).send({ from: account, value: 0 })
 				.on('confirmation', async () => {
-					const maxSupply = await openPunks.methods.maxSupply().call()
-					const totalSupply = await openPunks.methods.totalSupply().call()
+					const maxSupply = await laPiscina.methods.maxSupply().call()
+					const totalSupply = await laPiscina.methods.totalSupply().call()
 					setSupplyAvailable(maxSupply - totalSupply)
 
-					const ownerOf = await openPunks.methods.walletOfOwner(account).call()
+					const ownerOf = await laPiscina.methods.walletOfOwner(account).call()
 					setOwnerOf(ownerOf)
 				})
 				.on('error', (error) => {
@@ -148,7 +148,7 @@ function App() {
 
 	const cycleImages = async () => {
 		const getRandomNumber = () => {
-			const counter = (Math.floor(Math.random() * 1000)) + 1
+			const counter = (Math.floor(Math.random() * 20)) + 1
 			setCounter(counter)
 		}
 
@@ -169,8 +169,8 @@ function App() {
 
 					<Row className='header my-3 p-3 mb-0 pb-0'>
 						<Col xs={12} md={12} lg={8} xxl={8}>
-							<h1>Open Punks</h1>
-							<p className='sub-header'>Availble on 05 / 26 / 22</p>
+							<h1>La Piscina</h1>
+							<p className='sub-header'>Available on 2 / 9 / 23</p>
 						</Col>
 						<Col className='flex social-icons'>
 							<a
@@ -197,8 +197,8 @@ function App() {
 					<Row className='flex m-3'>
 						<Col md={5} lg={4} xl={5} xxl={4} className='text-center'>
 							<img
-								src={`https://gateway.pinata.cloud/ipfs/QmNN9ATnagEMrC9V5Up9c8KUrZGDiCBQVS58x3ojktg2Lt/${counter}.png`}
-								alt="Crypto Punk"
+								src={`https://bafybeiaqcufkoesr7gt4ficdrtsv7pbdivcl7f6brnjeirykyz6j4h5kcq.ipfs.nftstorage.link/${counter}.png`}
+								alt="La Piscina"
 								className='showcase'
 							/>
 						</Col>
@@ -241,7 +241,7 @@ function App() {
 									{ownerOf.length > 0 &&
 										<p><small>View your NFT on
 											<a
-												href={`${openseaURL}/assets/${openPunks._address}/${ownerOf[0]}`}
+												href={`${openseaURL}/assets/${laPiscina._address}/${ownerOf[0]}`}
 												target='_blank'
 												style={{ display: 'inline-block', marginLeft: '3px' }}>
 												OpenSea
@@ -254,12 +254,12 @@ function App() {
 
 					<Row style={{ marginTop: "100px" }}>
 						<Col>
-							{openPunks &&
+							{laPiscina &&
 								<a
-									href={`${explorerURL}/address/${openPunks._address}`}
+									href={`${explorerURL}/address/${laPiscina._address}`}
 									target='_blank'
 									className='text-center'>
-									{openPunks._address}
+									{laPiscina._address}
 								</a>
 							}
 						</Col>

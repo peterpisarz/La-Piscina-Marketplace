@@ -1,4 +1,4 @@
-import logo from '../images/logo.png'
+import logo from '../images/HStC_Logo_788x747.png'
 
 const Navbar = ({ web3Handler, account, explorerURL }) => {
     return (

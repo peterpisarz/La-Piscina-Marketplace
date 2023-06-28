@@ -1,4 +1,4 @@
-const OpenPunks = artifacts.require("./OpenPunks")
+const LaPiscina = artifacts.require("./LaPiscina")
 
 require('chai')
     .use(require('chai-as-promised'))
@@ -6,7 +6,7 @@ require('chai')
 
 const EVM_REVERT = 'VM Exception while processing transaction: revert'
 
-contract('OpenPunks', ([deployer, user]) => {
+contract('LaPiscina', ([deployer, user]) => {
 
     const NAME = 'Open Punks'
     const SYMBOL = 'OP'
@@ -17,7 +17,7 @@ contract('OpenPunks', ([deployer, user]) => {
     const IPFS_IMAGE_METADATA_URI = 'ipfs://IPFS-IMAGE-METADATA-CID/'
     const IPFS_HIDDEN_IMAGE_METADATA_URI = 'ipfs://IPFS-HIDDEN-METADATA-CID/hidden.json'
 
-    let openPunks
+    let laPiscina
 
     describe('Deployment', () => {
 
@@ -27,7 +27,7 @@ contract('OpenPunks', ([deployer, user]) => {
         beforeEach(async () => {
             const NFT_MINT_DATE = (Date.now() + milliseconds).toString().slice(0, 10)
 
-            openPunks = await OpenPunks.new(
+            laPiscina = await LaPiscina.new(
                 NAME,
                 SYMBOL,
                 COST,
@@ -41,32 +41,32 @@ contract('OpenPunks', ([deployer, user]) => {
         })
 
         it('Returns the contract name', async () => {
-            result = await openPunks.name()
+            result = await laPiscina.name()
             result.should.equal(NAME)
         })
 
         it('Returns the symbol', async () => {
-            result = await openPunks.symbol()
+            result = await laPiscina.symbol()
             result.should.equal(SYMBOL)
         })
 
         it('Returns the cost to mint', async () => {
-            result = await openPunks.cost()
+            result = await laPiscina.cost()
             result.toString().should.equal(COST.toString())
         })
 
         it('Returns the max supply', async () => {
-            result = await openPunks.maxSupply()
+            result = await laPiscina.maxSupply()
             result.toString().should.equal(MAX_SUPPLY.toString())
         })
 
         it('Returns the max mint amount', async () => {
-            result = await openPunks.maxMintAmount()
+            result = await laPiscina.maxMintAmount()
             result.toString().should.equal('1')
         })
 
         it('Returns the time deployed', async () => {
-            result = await openPunks.timeDeployed()
+            result = await laPiscina.timeDeployed()
 
             if (result > 0) {
                 assert.isTrue(true)
@@ -79,7 +79,7 @@ contract('OpenPunks', ([deployer, user]) => {
         it('Returns the amount of seconds from deployment to wait until minting', async () => {
             let buffer = 2
             let target = Number(milliseconds.toString().slice(0, 3))
-            result = await openPunks.allowMintingAfter()
+            result = await laPiscina.allowMintingAfter()
             result = Number(result)
 
             // NOTE: Sometimes the seconds may be off by 1, As long as the seconds are 
@@ -94,7 +94,7 @@ contract('OpenPunks', ([deployer, user]) => {
         it('Returns how many seconds left until minting allowed', async () => {
             let buffer = 2
             let target = Number(milliseconds.toString().slice(0, 3))
-            result = await openPunks.getSecondsUntilMinting()
+            result = await laPiscina.getSecondsUntilMinting()
             result = Number(result)
 
             // NOTE: Sometimes the seconds may be off by 1, As long as the seconds are 
@@ -107,12 +107,12 @@ contract('OpenPunks', ([deployer, user]) => {
         })
 
         it('Returns current pause state', async () => {
-            result = await openPunks.isPaused()
+            result = await laPiscina.isPaused()
             result.toString().should.equal('false')
         })
 
         it('Returns current reveal state', async () => {
-            result = await openPunks.isRevealed()
+            result = await laPiscina.isRevealed()
             result.toString().should.equal('true')
         })
     })
@@ -125,7 +125,7 @@ contract('OpenPunks', ([deployer, user]) => {
             beforeEach(async () => {
                 const NFT_MINT_DATE = Date.now().toString().slice(0, 10)
 
-                openPunks = await OpenPunks.new(
+                laPiscina = await LaPiscina.new(
                     NAME,
                     SYMBOL,
                     COST,
@@ -135,7 +135,7 @@ contract('OpenPunks', ([deployer, user]) => {
                     IPFS_HIDDEN_IMAGE_METADATA_URI,
                 )
 
-                result = await openPunks.mint(1, { from: user, value: web3.utils.toWei('0', 'ether') })
+                result = await laPiscina.mint(1, { from: user, value: web3.utils.toWei('0', 'ether') })
             })
 
             it('Returns the address of the minter', async () => {
@@ -144,22 +144,22 @@ contract('OpenPunks', ([deployer, user]) => {
             })
 
             it('Updates the total supply', async () => {
-                result = await openPunks.totalSupply()
+                result = await laPiscina.totalSupply()
                 result.toString().should.equal('1')
             })
 
             it('Returns IPFS URI', async () => {
-                result = await openPunks.tokenURI(1)
+                result = await laPiscina.tokenURI(1)
                 result.should.equal(`${IPFS_IMAGE_METADATA_URI}1.json`)
             })
 
             it('Returns how many a minter owns', async () => {
-                result = await openPunks.balanceOf(user)
+                result = await laPiscina.balanceOf(user)
                 result.toString().should.equal('1')
             })
 
             it('Returns the IDs of minted NFTs', async () => {
-                result = await openPunks.walletOfOwner(user)
+                result = await laPiscina.walletOfOwner(user)
                 result.length.should.equal(1)
                 result[0].toString().should.equal('1')
             })
@@ -173,7 +173,7 @@ contract('OpenPunks', ([deployer, user]) => {
                 // Some date in the future
                 const NFT_MINT_DATE = new Date("May 26, 2030 18:00:00").getTime().toString().slice(0, 10)
 
-                openPunks = await OpenPunks.new(
+                laPiscina = await LaPiscina.new(
                     NAME,
                     SYMBOL,
                     COST,
@@ -185,7 +185,7 @@ contract('OpenPunks', ([deployer, user]) => {
             })
 
             it('Attempt to mint before mint date', async () => {
-                await openPunks.mint(1, { from: user, value: web3.utils.toWei('0', 'ether') }).should.be.rejectedWith(EVM_REVERT)
+                await laPiscina.mint(1, { from: user, value: web3.utils.toWei('0', 'ether') }).should.be.rejectedWith(EVM_REVERT)
             })
         })
     })
@@ -198,7 +198,7 @@ contract('OpenPunks', ([deployer, user]) => {
             beforeEach(async () => {
                 const NFT_MINT_DATE = Date.now().toString().slice(0, 10)
 
-                openPunks = await OpenPunks.new(
+                laPiscina = await LaPiscina.new(
                     NAME,
                     SYMBOL,
                     COST,
@@ -211,43 +211,43 @@ contract('OpenPunks', ([deployer, user]) => {
 
             it('Sets the cost', async () => {
                 let cost = web3.utils.toWei('1', 'ether')
-                await openPunks.setCost(cost, { from: deployer })
-                result = await openPunks.cost()
+                await laPiscina.setCost(cost, { from: deployer })
+                result = await laPiscina.cost()
                 result.toString().should.equal(cost)
             })
 
             it('Sets the pause state', async () => {
                 let isPaused = true // Opposite of the default contract state
-                await openPunks.setIsPaused(isPaused, { from: deployer })
-                result = await openPunks.isPaused()
+                await laPiscina.setIsPaused(isPaused, { from: deployer })
+                result = await laPiscina.isPaused()
                 result.toString().should.equal(isPaused.toString())
             })
 
             it('Sets the reveal state', async () => {
                 let isRevealed = false // Opposite of the default contract state
-                await openPunks.setIsRevealed(isRevealed, { from: deployer })
-                result = await openPunks.isRevealed()
+                await laPiscina.setIsRevealed(isRevealed, { from: deployer })
+                result = await laPiscina.isRevealed()
                 result.toString().should.equal(isRevealed.toString())
             })
 
             it('Sets the max batch mint amount', async () => {
                 let amount = 5 // Different from the default contract state
-                await openPunks.setmaxMintAmount(5, { from: deployer })
-                result = await openPunks.maxMintAmount()
+                await laPiscina.setmaxMintAmount(5, { from: deployer })
+                result = await laPiscina.maxMintAmount()
                 result.toString().should.equal(amount.toString())
             })
 
             it('Sets the IPFS not revealed URI', async () => {
                 let uri = 'ipfs://IPFS-NEW-IMAGE-METADATA-CID/' // Different from the default contract state
-                await openPunks.setNotRevealedURI(uri, { from: deployer })
-                result = await openPunks.notRevealedUri()
+                await laPiscina.setNotRevealedURI(uri, { from: deployer })
+                result = await laPiscina.notRevealedUri()
                 result.toString().should.equal(uri)
             })
 
             it('Sets the base extension', async () => {
                 let extension = '.example' // Different from the default contract state
-                await openPunks.setBaseExtension('.example', { from: deployer })
-                result = await openPunks.baseExtension()
+                await laPiscina.setBaseExtension('.example', { from: deployer })
+                result = await laPiscina.baseExtension()
                 result.toString().should.equal(extension)
             })
         })

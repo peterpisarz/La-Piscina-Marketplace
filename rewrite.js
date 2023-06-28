@@ -14,12 +14,12 @@ const ContractSpace = "Open Punks"
 const ContractUnder = "open_punks"
 
 // NEW VARIABLE NAMES - *** UPDATE THESE BEFORE RUNNING ***
-const NewContract = "ShowTime"
-const NewSpace = "Show Time"
-const newContract = "showTime"
-const setContract = "setShowTime"
-const newPackage = "show_time"
-const newDash = "show-time"
+const NewContract = "LaPiscina"
+const NewSpace = "La Piscina"
+const newContract = "laPiscina"
+const setContract = "setLaPiscina"
+const newPackage = "la_piscina"
+const newDash = "la-piscina"
 
 // PATHS TO FILES NEEDING VARIABLE REWRITE
 const contract = path.join(basePath, "src/contracts/OpenPunks.sol")
