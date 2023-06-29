@@ -7,7 +7,7 @@ import Web3 from 'web3'
 import twitter from '../images/socials/twitter.svg'
 import instagram from '../images/socials/instagram.svg'
 import opensea from '../images/socials/opensea.svg'
-import showcase from '../images/showcase.png'
+import collage from '../images/Collage.png'
 import '../App.css'
 
 // Import Components
@@ -206,7 +206,7 @@ function App() {
 							{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} className='countdown mx-3' />}
 							<p className='text'>
 								Connect with Metamask to mint your NFT! <br/><br/>
-								Each NFT comes with a unique prize like free drinks, appetizers, and swag.<br/><br/>
+								Each NFT comes with a unique prize like cocktails, tapas, and swag.<br/><br/>
 								NFTs are generated randomly, but one lucky minter will get a complimentary night stay in the Proper Hotel!
 							</p>
 							<a href="#about" className='button mx-3'>Learn More!</a>
@@ -219,7 +219,7 @@ function App() {
 					<Row className='flex m-3'>
 						<h2 className='text-center p-3'>About the Collection</h2>
 						<Col md={5} lg={4} xl={5} xxl={4} className='text-center'>
-							<img src={showcase} alt="Multiple Crypto Punks" className='showcase' />
+							<img src={collage} alt="Multiple Crypto Punks" className='showcase' />
 						</Col>
 						<Col md={5} lg={4} xl={5} xxl={4}>
 							{isError ? (
