@@ -218,7 +218,7 @@ function App() {
 
 					<Row className='flex m-3'>
 						<h2 className='text-center p-3'>About the Collection</h2>
-						<Col md={5} lg={4} xl={5} xxl={4} className='text-center'>
+						<Col md={5} lg={4} xl={5} xxl={5} className='text-center'>
 							<img src={collage} alt="Multiple Crypto Punks" className='showcase' />
 						</Col>
 						<Col md={5} lg={4} xl={5} xxl={4}>
@@ -229,8 +229,8 @@ function App() {
 									<h3>Mint your NFT in</h3>
 									{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} className='countdown' />}
 									<ul>
-										<li>1,000 generated punked out images using an art generator</li>
-										<li>Free minting on Rinkeby testnet</li>
+										<li>20 unique Photography NFTs capturing poolside life</li>
+										<li>Free minting on Goerli testnet</li>
 										<li>Viewable on Opensea shortly after minting</li>
 									</ul>
 
