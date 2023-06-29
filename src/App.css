@@ -62,7 +62,7 @@ main {
 h1 {
     font-family: "Monaco";
     font-weight: 700;
-    font-size: clamp(3rem, 10vw, 10rem);
+    font-size: clamp(3rem, 10vw, 5rem);
     transform: rotate(-0deg);
     padding-left: .8em;
 }
@@ -70,7 +70,7 @@ h1 {
 h2 {
     font-family: "Monaco";
     font-weight: 700;
-    font-size: clamp(2rem, 5vw, 5rem);
+    font-size: clamp(2rem, 5vw, 3rem);
     padding-left: .8em;
 }
 
@@ -80,10 +80,10 @@ h3 {
 
 .sub-header {
     font-family: "Monaco";
-    font-weight: 700;
-    font-size: clamp(2rem, 5vw, 4rem);
-    transform: rotate(-0deg) translateX(2.5em) translateY(-0.5em);
-    padding-left: .8em;
+    font-weight: 500;
+    font-size: clamp(2rem, 5vw, 2rem);
+    transform: rotate(-0deg) translateX(0em) translateY(-.08em);
+    padding-left: 1.8em;
 }
 
 .countdown {
@@ -157,8 +157,10 @@ a:hover {
 }
 
 .showcase {
-    width: 250px;
+    width: 500px;
     height: auto;
+    border: 3px solid black;
+
 }
 
 /* Social Media Icon */
@@ -185,13 +187,13 @@ a:hover {
 /* Media Queries */
 @media screen and (min-width: 768px) {
     .showcase {
-        width: 300px;
+        width: 400px;
     }
 }
 
 @media screen and (min-width: 1200px) {
     .showcase {
-        width: 400px;
+        width: 600px;
     }
 }
 
@@ -203,4 +205,76 @@ a:hover {
     .social-icons {
         justify-content: flex-start;
     }
+}
+
+/* ------------------------------------------------------ */
+/* -- CARDS -- */
+
+.cards__section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.cards__section h3 {
+  margin: 50px 0 20px;
+}
+
+.cards {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+  margin-top: 20px;
+}
+
+.card {
+  width: 350px;
+  height: 275px;
+
+  border: 1px solid var(--clr-black);
+  margin: 10px auto;
+
+  cursor: pointer;
+  position: relative;
+
+  transition: all 250ms ease;
+}
+
+.card:hover {
+  box-shadow: 1px 1px 5px var(--clr-grey);
+}
+
+.card__image {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+.card__image img {
+  max-width: 100%;
+}
+
+.card__info {
+  width: 100%;
+  height: 45%;
+
+  background-color: var(--clr-white);
+
+  padding: 5px 10px;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.card__info h4 {
+  font-family: "Open Sans";
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+.card__info p {
+  font-family: "Open Sans";
+  font-size: 0.90em;
+  margin-top: 5px;
 }

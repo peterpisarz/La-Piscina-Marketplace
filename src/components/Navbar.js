@@ -25,6 +25,7 @@ const Navbar = ({ web3Handler, account, explorerURL }) => {
                 <button onClick={web3Handler} className="button nav-button btn-sm mx-4">Connect Wallet</button>
             )}
         </nav>
+
     )
 }
 

@@ -167,10 +167,10 @@ function App() {
 			<main>
 				<section id='welcome' className='welcome'>
 
-					<Row className='header my-3 p-3 mb-0 pb-0'>
+					<Row className='header my-0 p-0 mb-0 pb-0'>
 						<Col xs={12} md={12} lg={8} xxl={8}>
 							<h1>La Piscina</h1>
-							<p className='sub-header'>Available on 2 / 9 / 23</p>
+							<p className='sub-header'>Available July 31st, 2023</p>
 						</Col>
 						<Col className='flex social-icons'>
 							<a
@@ -195,7 +195,7 @@ function App() {
 					</Row>
 
 					<Row className='flex m-3'>
-						<Col md={5} lg={4} xl={5} xxl={4} className='text-center'>
+						<Col md={5} lg={2} xl={2} xxl={5} className='text-center'>
 							<img
 								src={`https://bafybeiaqcufkoesr7gt4ficdrtsv7pbdivcl7f6brnjeirykyz6j4h5kcq.ipfs.nftstorage.link/${counter}.png`}
 								alt="La Piscina"
@@ -205,7 +205,9 @@ function App() {
 						<Col md={5} lg={4} xl={5} xxl={4}>
 							{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} className='countdown mx-3' />}
 							<p className='text'>
-								By attending the masterclass, you'll learn how to generate NFT images, upload to IPFS, create your NFT contract, and use OpenSea!
+								Connect with Metamask to mint your NFT! <br/><br/>
+								Each NFT comes with a unique prize like free drinks, appetizers, and swag.<br/><br/>
+								NFTs are generated randomly, but one lucky minter will get a complimentary night stay in the Proper Hotel!
 							</p>
 							<a href="#about" className='button mx-3'>Learn More!</a>
 						</Col>
