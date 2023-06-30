@@ -9,15 +9,25 @@ module.exports = {
 			network_id: "*" // Match any network id
 		},
 
-		rinkeby: {
-			provider: function () {
-				return new HDWalletProvider(
-					[process.env.DEPLOYER_PRIVATE_KEY],
-					`wss://rinkeby.infura.io/ws/v3/${process.env.INFURA_API_KEY}` // URL to Ethereum Node
-				)
-			},
-			network_id: 4
-		},
+	    sepolia: {
+	      provider: function () {
+	        return new HDWalletProvider(
+	          [process.env.DEPLOYER_PRIVATE_KEY],
+	          `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY}` // URL to Ethereum Node
+	        )
+	      },
+	      network_id: 11155111
+	    },
+
+		// rinkeby: {
+		// 	provider: function () {
+		// 		return new HDWalletProvider(
+		// 			[process.env.DEPLOYER_PRIVATE_KEY],
+		// 			`wss://rinkeby.infura.io/ws/v3/${process.env.INFURA_API_KEY}` // URL to Ethereum Node
+		// 		)
+		// 	},
+		// 	network_id: 4
+		// },
 
 		matic: {
 			provider: function () {
