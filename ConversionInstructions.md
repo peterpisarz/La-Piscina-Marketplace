@@ -68,7 +68,9 @@ NFT_MINT_DATE="Apr 18, 2022 22:00:00" // Update this date (resource: https://www
 
 14) Replace Social Media Links, Instagram, Twitter
 
-15) Run test script for new contract
+15) Update like from DappU to HollyStCrypto IG
+
+16) Run test script for new contract
 MyNewNFTProject.test.js
 
 16) App.js
@@ -81,3 +83,5 @@ MyNewNFTProject.test.js
 17) App.css
 - h1
 - sub-header
+
+18) confirm testnet is available in config.json

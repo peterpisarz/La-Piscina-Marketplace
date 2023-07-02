@@ -128,7 +128,7 @@ function App() {
 			setIsMinting(true)
 			setIsError(false)
 
-			await laPiscina.methods.mint(1).send({ from: account, value: 0 })
+			await laPiscina.methods.mint(1).send({ from: account, value: 10000000000000000 })
 				.on('confirmation', async () => {
 					const maxSupply = await laPiscina.methods.maxSupply().call()
 					const totalSupply = await laPiscina.methods.totalSupply().call()
@@ -202,7 +202,7 @@ function App() {
 								className='showcase'
 							/>
 						</Col>
-						<Col md={5} lg={4} xl={5} xxl={4}>
+						<Col md={5} lg={4} xl={5} xxl={4} >
 							{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} className='countdown mx-3' />}
 							<p className='text'>
 								Connect with Metamask to mint your NFT! <br/><br/>
@@ -230,7 +230,7 @@ function App() {
 									{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} className='countdown' />}
 									<ul>
 										<li>20 unique Photography NFTs capturing poolside life</li>
-										<li>Free minting on Goerli testnet</li>
+										<li>Free minting on Sepolia testnet</li>
 										<li>Viewable on Opensea shortly after minting</li>
 									</ul>
 

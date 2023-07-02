@@ -25,6 +25,12 @@
             "explorerURL": "https://polygonscan.com",
             "openseaURL": "https://opensea.io"
         },
+        "11155111": {
+            "name": "Sepolia Testnet",
+            "isTestnet": true,
+            "explorerURL": "https://sepolia.etherscan.io",
+            "openseaURL": "https://testnets.opensea.io"
+        },
         "5777": {
             "name": "Localhost",
             "isTestnet": true,
