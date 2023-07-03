@@ -167,7 +167,7 @@ function App() {
 			<main>
 				<section id='welcome' className='welcome'>
 
-					<Row className='header my-0 p-0 mb-0 pb-0'>
+					<Row className='header my-3 p-0 mb-0 pb-0'>
 						<Col xs={12} md={12} lg={8} xxl={8}>
 							<h1>La Piscina</h1>
 							<p className='sub-header'>Available June 30th, 2023</p>
@@ -261,7 +261,7 @@ function App() {
 									href={`${explorerURL}/address/${laPiscina._address}`}
 									target='_blank'
 									className='text-center'>
-									{laPiscina._address}
+									View the Contract: {laPiscina._address.slice(0, 5) + '...' + laPiscina._address.slice(38, 42)}
 								</a>
 							}
 						</Col>

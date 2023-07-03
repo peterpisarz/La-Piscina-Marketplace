@@ -17,6 +17,7 @@ html {
 }
 
 body {
+    margin: 0;
     background: var(--clr-primary);
     background: linear-gradient(var(--clr-primary), var(--clr-secondary));
     color: var(--clr-text-light);
@@ -36,14 +37,31 @@ body {
 
 nav {
     height: 10vh;
+    width: 100%;
+    left: 0;
+    right: 0;
+    position: fixed;
+    background-color: #8B4513;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
 }
 
 main {
     width: 100%;
     margin-top: 10vh;
     scroll-snap-type: y mandatory;
+    overflow-x: hidden;
 
-    /* padding: 3em 1em; */
+    /*padding: 3em 1em;*/
 }
 
 .welcome {
@@ -64,7 +82,8 @@ h1 {
     font-weight: 700;
     font-size: clamp(3rem, 10vw, 5rem);
     transform: rotate(-0deg);
-    padding-left: .8em;
+/*    padding-left: .8em;*/
+    text-align: center;
 }
 
 h2 {
@@ -82,8 +101,9 @@ h3 {
     font-family: "Monaco";
     font-weight: 500;
     font-size: clamp(2rem, 5vw, 2rem);
-    transform: rotate(-0deg) translateX(0em) translateY(-.08em);
-    padding-left: 1.8em;
+    text-align: center;
+/*    transform: rotate(-0deg) translateX(0em) translateY(-.08em);*/
+/*    padding-left: 1.8em;*/
 }
 
 .countdown {
@@ -157,7 +177,7 @@ a:hover {
 }
 
 .showcase {
-    width: 500px;
+    width: 100%;
     height: auto;
     border: 3px solid black;
 
