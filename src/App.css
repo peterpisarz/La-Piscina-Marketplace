@@ -44,10 +44,17 @@ nav {
     background-color: #8B4513;
 }
 
-.navbar {
+/*.navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  overflow: hidden; /* Prevent overflow 
+}*/
+
+.navbar-brand {
+  flex: 1; /* Take up remaining space */
+  white-space: nowrap; /* Prevent line break */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Show ellipsis (...) for truncated text */
 }
 
 .navbar-content {
