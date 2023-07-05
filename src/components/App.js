@@ -40,6 +40,8 @@ function App() {
 	const [counter, setCounter] = useState(7)
 	const [isCycling, setIsCycling] = useState(false)
 
+	const [isPaused, setIsPaused] = useState()
+
 	const loadBlockchainData = async (_web3, _account, _networkId) => {
 		// Fetch Contract, Data, etc.
 		try {
@@ -123,6 +125,15 @@ function App() {
 			return
 		}
 
+		const isPaused = await laPiscina.methods.isPaused().call()
+		setIsPaused(isPaused)
+
+		if (isPaused) {
+			console.log('Minting is Paused')
+			window.alert('Minting is currently paused. Please try again later')
+			return
+		}
+
 		// Mint NFT
 		if (laPiscina && account) {
 			setIsMinting(true)
@@ -197,7 +208,7 @@ function App() {
 					<Row className='flex m-3'>
 						<Col md={5} lg={2} xl={2} xxl={5} className='text-center'>
 							<img
-								src={`https://bafybeiaqcufkoesr7gt4ficdrtsv7pbdivcl7f6brnjeirykyz6j4h5kcq.ipfs.nftstorage.link/${counter}.png`}
+								src={`https://bafybeigd7cqgmegxydsk7vbnwmes3ihs6fg5i52j5jrfca4clnflybpqje.ipfs.nftstorage.link/${counter}.png`}
 								alt="La Piscina"
 								className='showcase'
 							/>
