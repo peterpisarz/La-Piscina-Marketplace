@@ -42,6 +42,8 @@ function App() {
 
 	const [isPaused, setIsPaused] = useState()
 
+	const [reloadFlag, setReloadFlag] = useState(false)
+
 	const loadBlockchainData = async (_web3, _account, _networkId) => {
 		// Fetch Contract, Data, etc.
 		try {
@@ -76,7 +78,7 @@ function App() {
 
 			const accounts = await web3.eth.getAccounts()
 
-			if (accounts.length > 0) {
+			if (accounts.length > 0 && reloadFlag === false) {
 				setAccount(accounts[0])
 			} else {
 				setMessage('Please connect with MetaMask')
@@ -167,6 +169,11 @@ function App() {
 		setIsCycling(true)
 	}
 
+	const removeAccountHandler = () => {
+		setAccount(null)
+		setReloadFlag(true)
+	}
+
 	useEffect(() => {
 		loadWeb3()
 		cycleImages()
@@ -174,7 +181,11 @@ function App() {
 
 	return (
 		<div>
-			<Navbar web3Handler={web3Handler} account={account} explorerURL={explorerURL} />
+			<Navbar 
+				web3Handler={web3Handler} 
+				account={account} 
+				removeAccount={removeAccountHandler}
+			/>
 			<main>
 				<section id='welcome' className='welcome'>
 

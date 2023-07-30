@@ -1,7 +1,11 @@
 import logo from '../images/HStC_Logo_788x747.png'
+import WalletModal from './Modal'
 
-const Navbar = ({ web3Handler, account, explorerURL }) => {
+const Navbar = ({ web3Handler, account, removeAccount }) => {
+
+
     return (
+        <div>
         <nav className="navbar fixed-top mx-0">
             <a
                 className="navbar-brand col-sm-2 col-md-2 mr-0 mx-4"
@@ -13,23 +17,15 @@ const Navbar = ({ web3Handler, account, explorerURL }) => {
                 Holly St Crypto
             </a>
 
-            {account ? (
-                <a
-                    href={`${explorerURL}/address/${account}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="button nav-button btn-sm mx-4">
-                    {account.slice(0, 5) + '...' + account.slice(38, 42)}
-                </a>
-            ) : (
-                <button 
-                    onClick={web3Handler}
-                    className="button nav-button btn-sm mx-4"
-                >
-                    Connect Wallet
-                </button>
-            )}
+            
+            <WalletModal 
+                web3Handler={web3Handler}
+                removeAccount={removeAccount}
+                account={account}
+            />
         </nav>
+        
+        </div>
 
     )
 }
