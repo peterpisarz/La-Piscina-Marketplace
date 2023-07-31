@@ -29,7 +29,7 @@ function WalletModal({ web3Handler, removeAccount, account }) {
                     onClick={handleDisconnect}
                     className="button nav-button btn-sm mx-4"    
                 >
-                    Disconnect Wallet
+                    {account.slice(0, 5) + '...' + account.slice(38, 42)}
                 </button>
             ) : (
                 <button 
@@ -65,7 +65,7 @@ function WalletModal({ web3Handler, removeAccount, account }) {
                 marginBottom: '5px', // Add spacing between buttons
               }}
             >
-              <img src={metamaskIcon} alt="Metamask Logo" width={25} length={25} />
+              <img src={metamaskIcon} alt="Metamask Logo" width={25} length={25} style={{ marginRight: '5px'}}/>
               MetaMask
             </Button>
         
@@ -83,8 +83,8 @@ function WalletModal({ web3Handler, removeAccount, account }) {
                 marginBottom: '5px', // Add spacing between buttons
               }}
             >
-              <img src={coinbaseIcon} alt="Metamask Logo" width={25} length={25} />
-              Coinbase Wallet
+              <img src={coinbaseIcon} alt="Metamask Logo" width={25} length={25} style={{ marginRight: '5px'}}/>
+               Coinbase Wallet
             </Button>
         
             <Button 
@@ -101,8 +101,8 @@ function WalletModal({ web3Handler, removeAccount, account }) {
                 marginBottom: '5px', // Add spacing between buttons
               }}
             >
-              <img src={walletConnectIcon} alt="Metamask Logo" width={25} length={25} />
-              Wallet Connect
+              <img src={walletConnectIcon} alt="Metamask Logo" width={25} length={25} style={{ marginRight: '5px'}}/>
+               Wallet Connect
             </Button>
         </Modal.Body>
       </Modal>

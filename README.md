@@ -1,4 +1,4 @@
-# Open Punks
+# Holly Street Crypto Marketplace
 
 ## Technology Stack & Tools
 
