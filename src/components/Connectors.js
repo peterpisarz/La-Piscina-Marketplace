@@ -5,13 +5,13 @@ import { WalletLinkConnector } from "@web3-react/walletlink-connector"
 const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42, 11155111]})
 
 const walletConnect = new WalletConnectConnector({
-  rpcUrl: `https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_KEY}`,
+  rpcUrl: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
   bridge: "https:bridge.walletconnect.org",
   qrcode: true,
 });
 
 const walletlink = new WalletLinkConnector({
-  url: `https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_KEY}`,
+  url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
   appName: "web3-react-demo",
 })
 
