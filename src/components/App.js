@@ -252,14 +252,14 @@ function App() {
 									{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} className='countdown' />}
 									<ul>
 										<li>20 unique Photography NFTs capturing poolside life</li>
-										<li>Free minting on Sepolia testnet</li>
+										<li>Minting available on the Sepolia testnet: 0.01 ETH</li>
 										<li>Viewable on Opensea shortly after minting</li>
 									</ul>
 
 									{isMinting ? (
 										<Spinner animation="border" className='p-3 m-2' />
 									) : (
-										<button onClick={mintNFTHandler} className='button mint-button mt-3'>Mint</button>
+										<button onClick={mintNFTHandler} className='button mint-button mt-3'>Mint & Win!</button>
 									)}
 
 									{ownerOf.length > 0 &&
