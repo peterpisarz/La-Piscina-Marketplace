@@ -27,7 +27,7 @@ function WalletModal({ web3Handler, removeAccount, account }) {
 
   const handleMetamaskConnect = () => {
       if (isMobileDevice()) {
-          window.location.href = `https://metamask.app.link/dapp/${window.location.href}`;
+          window.open('https://metamask.app.link/dapp/la-piscina.on.fleek.co');
           return;
       }
       
