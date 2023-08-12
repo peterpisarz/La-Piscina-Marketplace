@@ -73,6 +73,15 @@ function App() {
 
 	const loadWeb3 = async () => {
 		if (typeof window.ethereum !== 'undefined') {
+
+			// edge case if MM and CBW are both installed
+	        let provider = window.ethereum;
+	        if (window.ethereum.providers?.length) {
+	            window.ethereum.providers.forEach(p => {
+	                if (p.isMetaMask) provider = p;
+	            });
+	        }
+
 			const web3 = new Web3(window.ethereum)
 			setWeb3(web3)
 
@@ -94,12 +103,12 @@ function App() {
 
 			await loadBlockchainData(web3, accounts[0], networkId)
 
-			window.ethereum.on('accountsChanged', function (accounts) {
+			provider.on('accountsChanged', function (accounts) {
 				setAccount(accounts[0])
 				setMessage(null)
 			})
 
-			window.ethereum.on('chainChanged', (chainId) => {
+			provider.on('chainChanged', (chainId) => {
 				// Handle the new chain.
 				// Correctly handling chain changes can be complicated.
 				// We recommend reloading the page unless you have good reason not to.

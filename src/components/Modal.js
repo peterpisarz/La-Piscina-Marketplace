@@ -19,7 +19,6 @@ function WalletModal({ web3Handler, removeAccount, account }) {
   }
   const handleShow = () => {
     setShow(true)
-    web3Handler()
   };
 
   return (
