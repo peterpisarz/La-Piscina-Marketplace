@@ -1544,9 +1544,12 @@ contract LaPiscina is ERC721Enumerable, Ownable {
     }
 
     function withdraw() public payable onlyOwner {
+        uint256 balance = address(this).balance;
         (bool success, ) = payable(msg.sender).call{
             value: address(this).balance
         }("");
         require(success);
+        emit FundsWithdrawn(msg.sender, balance);
+
     }
 }

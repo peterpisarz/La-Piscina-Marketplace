@@ -7,6 +7,10 @@ import metamaskIcon from '../images/metamask-icon.webp'
 import coinbaseIcon from '../images/coinbase icon.jpg'
 import walletConnectIcon from '../images/wallet-connect icon.png'
 
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 function WalletModal({ web3Handler, removeAccount, account }) {
   const { activate } = useWeb3React();
   const [show, setShow] = useState(false);
@@ -20,6 +24,17 @@ function WalletModal({ web3Handler, removeAccount, account }) {
   const handleShow = () => {
     setShow(true)
   };
+
+  const handleMetamaskConnect = () => {
+      if (isMobileDevice()) {
+          window.location.href = `https://metamask.app.link/dapp/${window.location.href}`;
+          return;
+      }
+      
+      activate(connectors.injected);
+      handleClose();
+  };
+
 
   return (
     <>
@@ -52,10 +67,7 @@ function WalletModal({ web3Handler, removeAccount, account }) {
         <Modal.Body className="d-flex flex-column align-items-center justify-content-center">
             <Button 
               variant="outline-light"
-              onClick={() => {
-                activate(connectors.injected)
-                handleClose()
-              }}
+              onClick={handleMetamaskConnect}
               style={{
                 width: '300px',
                 border: '1px solid #333',
