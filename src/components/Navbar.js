@@ -1,7 +1,7 @@
 import logo from '../images/HStC_Logo_788x747.png'
 import WalletModal from './Modal'
 
-const Navbar = ({ web3Handler, account, removeAccount }) => {
+const Navbar = ({ web3Handler, account, removeAccount, setAccount }) => {
 
 
     return (
@@ -22,6 +22,7 @@ const Navbar = ({ web3Handler, account, removeAccount }) => {
                 web3Handler={web3Handler}
                 removeAccount={removeAccount}
                 account={account}
+                setAccount={setAccount}
             />
         </nav>
         

@@ -67,7 +67,7 @@ function App() {
 
 		} catch (error) {
 			setIsError(true)
-			setMessage("Contract not deployed to current network, please change network in MetaMask")
+			setMessage("Connect to the Sepolia Testnet in MetaMask to Mint & Win!")
 		}
 	}
 
@@ -192,8 +192,9 @@ function App() {
 		<div>
 			<Navbar 
 				web3Handler={web3Handler} 
-				account={account} 
+				accounts={account} 
 				removeAccount={removeAccountHandler}
+				setAccount={setAccount}
 			/>
 			<main>
 				<section id='welcome' className='welcome'>

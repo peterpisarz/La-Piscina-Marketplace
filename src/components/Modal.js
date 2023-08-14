@@ -11,8 +11,8 @@ function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-function WalletModal({ web3Handler, removeAccount, account }) {
-  const { activate } = useWeb3React();
+function WalletModal({ web3Handler, removeAccount, accounts, setAccount }) {
+  const { activate, account } = useWeb3React();
   const [show, setShow] = useState(false);
 
   const handleDisconnect = () => {
@@ -33,6 +33,7 @@ function WalletModal({ web3Handler, removeAccount, account }) {
       
       activate(connectors.injected);
       handleClose();
+      setAccount(account)
   };
 
 
