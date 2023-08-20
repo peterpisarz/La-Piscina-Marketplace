@@ -13,6 +13,7 @@ const walletConnect = new WalletConnectConnector({
 const walletlink = new WalletLinkConnector({
   url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
   appName: "web3-react-demo",
+  supportedChainIds: [1, 3, 4, 5, 42, 11155111]
 })
 
 export const connectors = {

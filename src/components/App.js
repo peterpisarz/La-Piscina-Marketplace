@@ -12,6 +12,7 @@ import '../App.css'
 
 // Import Components
 import Navbar from './Navbar'
+import AccountContext from './AccountContext';
 
 // Import ABI + Config
 import LaPiscina from '../abis/LaPiscina.json'
@@ -178,10 +179,10 @@ function App() {
 		setIsCycling(true)
 	}
 
-	const removeAccountHandler = () => {
-		setAccount(null)
-		setReloadFlag(true)
-	}
+	// const removeAccountHandler = () => {
+	// 	setAccount(null)
+	// 	setReloadFlag(true)
+	// }
 
 	useEffect(() => {
 		loadWeb3()
@@ -189,122 +190,123 @@ function App() {
 	}, [account]);
 
 	return (
-		<div>
-			<Navbar 
-				web3Handler={web3Handler} 
-				accounts={account} 
-				removeAccount={removeAccountHandler}
-				setAccount={setAccount}
-			/>
-			<main>
-				<section id='welcome' className='welcome'>
+		<AccountContext.Provider value={{ isError, setIsError, message, setMessage }}>
+			<div>
+				<Navbar 
+					web3Handler={web3Handler} 
+					accounts={account} 
+					setAccount={setAccount}
+				/>
+				<main>
+					<section id='welcome' className='welcome'>
 
-					<Row className='header my-3 p-0 mb-0 pb-0'>
-						<Col xs={12} md={12} lg={8} xxl={8}>
-							<h1>La Piscina</h1>
-							<p className='sub-header'>Available August 30th, 2023</p>
-						</Col>
-						<Col className='flex social-icons'>
-							<a
-								href="https://twitter.com/HollyStCrypto"
-								target='_blank'
-								className='circle flex button'>
-								<img src={twitter} alt="Twitter" />
-							</a>
-							<a
-								href="https://www.instagram.com/hollystcrypto/"
-								target='_blank'
-								className='circle flex button'>
-								<img src={instagram} alt="Instagram" />
-							</a>
-							<a
-								href={`${openseaURL}/collection/${config.PROJECT_NAME}`}
-								target='_blank'
-								className='circle flex button'>
-								<img src={opensea} alt="Opensea" />
-							</a>
-						</Col>
-					</Row>
-
-					<Row className='flex m-3'>
-						<Col md={5} lg={2} xl={2} xxl={5} className='text-center'>
-							<img
-								src={`https://bafybeigd7cqgmegxydsk7vbnwmes3ihs6fg5i52j5jrfca4clnflybpqje.ipfs.nftstorage.link/${counter}.png`}
-								alt="La Piscina"
-								className='showcase'
-							/>
-						</Col>
-						<Col md={5} lg={4} xl={5} xxl={4} >
-							{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} className='countdown mx-3' />}
-							<p className='text'>
-								Connect with Metamask to mint your NFT! <br/><br/>
-								Each NFT comes with a unique prize like cocktails, tapas, and swag.<br/><br/>
-								NFTs are generated randomly, but one lucky minter will get a complimentary night stay in the Proper Hotel!
-							</p>
-							<a href="#about" className='button mx-3'>Learn More!</a>
-						</Col>
-					</Row>
-
-				</section>
-				<section id='about' className='about'>
-
-					<Row className='flex m-3'>
-						<h2 className='text-center p-3'>About the Collection</h2>
-						<Col md={5} lg={4} xl={5} xxl={5} className='text-center'>
-							<img src={collage} alt="Multiple Crypto Punks" className='showcase' />
-						</Col>
-						<Col md={5} lg={4} xl={5} xxl={4}>
-							{isError ? (
-								<p>{message}</p>
-							) : (
-								<div>
-									<h3>Mint your NFT in</h3>
-									{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} className='countdown' />}
-									<ul>
-										<li>20 unique Photography NFTs capturing poolside life</li>
-										<li>Minting available on the Sepolia testnet: 0.01 ETH</li>
-										<li>Viewable on Opensea shortly after minting</li>
-									</ul>
-
-									{isMinting ? (
-										<Spinner animation="border" className='p-3 m-2' />
-									) : (
-										<button onClick={mintNFTHandler} className='button mint-button mt-3'>Mint & Win!</button>
-									)}
-
-									{ownerOf.length > 0 &&
-										<p><small>View your NFT on
-											<a
-												href={`${openseaURL}/assets/${laPiscina._address}/${ownerOf[0]}`}
-												target='_blank'
-												style={{ display: 'inline-block', marginLeft: '3px' }}>
-												OpenSea
-											</a>
-										</small></p>}
-								</div>
-							)}
-						</Col>
-					</Row>
-
-					<Row style={{ marginTop: "100px" }}>
-						<Col>
-							{laPiscina &&
+						<Row className='header my-3 p-0 mb-0 pb-0'>
+							<Col xs={12} md={12} lg={8} xxl={8}>
+								<h1>La Piscina</h1>
+								<p className='sub-header'>Available August 30th, 2023</p>
+							</Col>
+							<Col className='flex social-icons'>
 								<a
-									href={`${explorerURL}/address/${laPiscina._address}`}
+									href="https://twitter.com/HollyStCrypto"
 									target='_blank'
-									className='text-center'>
-									View the Contract: {laPiscina._address.slice(0, 5) + '...' + laPiscina._address.slice(38, 42)}
+									className='circle flex button'>
+									<img src={twitter} alt="Twitter" />
 								</a>
-							}
-						</Col>
-					</Row>
+								<a
+									href="https://www.instagram.com/hollystcrypto/"
+									target='_blank'
+									className='circle flex button'>
+									<img src={instagram} alt="Instagram" />
+								</a>
+								<a
+									href={`${openseaURL}/collection/${config.PROJECT_NAME}`}
+									target='_blank'
+									className='circle flex button'>
+									<img src={opensea} alt="Opensea" />
+								</a>
+							</Col>
+						</Row>
 
-				</section>
-			</main>
-			<footer>
+						<Row className='flex m-3'>
+							<Col md={5} lg={2} xl={2} xxl={5} className='text-center'>
+								<img
+									src={`https://bafybeigd7cqgmegxydsk7vbnwmes3ihs6fg5i52j5jrfca4clnflybpqje.ipfs.nftstorage.link/${counter}.png`}
+									alt="La Piscina"
+									className='showcase'
+								/>
+							</Col>
+							<Col md={5} lg={4} xl={5} xxl={4} >
+								{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} className='countdown mx-3' />}
+								<p className='text'>
+									Connect with Metamask to mint your NFT! <br/><br/>
+									Each NFT comes with a unique prize like cocktails, tapas, and swag.<br/><br/>
+									NFTs are generated randomly, but one lucky minter will get a complimentary night stay in the Proper Hotel!
+								</p>
+								<a href="#about" className='button mx-3'>Learn More!</a>
+							</Col>
+						</Row>
 
-			</footer>
-		</div>
+					</section>
+					<section id='about' className='about'>
+
+						<Row className='flex m-3'>
+							<h2 className='text-center p-3'>About the Collection</h2>
+							<Col md={5} lg={4} xl={5} xxl={5} className='text-center'>
+								<img src={collage} alt="Multiple Crypto Punks" className='showcase' />
+							</Col>
+							<Col md={5} lg={4} xl={5} xxl={4}>
+								{isError ? (
+									<p>{message}</p>
+								) : (
+									<div>
+										<h3>Mint your NFT in</h3>
+										{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} className='countdown' />}
+										<ul>
+											<li>20 unique Photography NFTs capturing poolside life</li>
+											<li>Minting available on the Sepolia testnet: 0.01 ETH</li>
+											<li>Viewable on Opensea shortly after minting</li>
+										</ul>
+
+										{isMinting ? (
+											<Spinner animation="border" className='p-3 m-2' />
+										) : (
+											<button onClick={mintNFTHandler} className='button mint-button mt-3'>Mint & Win!</button>
+										)}
+
+										{ownerOf.length > 0 &&
+											<p><small>View your NFT on
+												<a
+													href={`${openseaURL}/assets/${laPiscina._address}/${ownerOf[0]}`}
+													target='_blank'
+													style={{ display: 'inline-block', marginLeft: '3px' }}>
+													OpenSea
+												</a>
+											</small></p>}
+									</div>
+								)}
+							</Col>
+						</Row>
+
+						<Row style={{ marginTop: "100px" }}>
+							<Col>
+								{laPiscina &&
+									<a
+										href={`${explorerURL}/address/${laPiscina._address}`}
+										target='_blank'
+										className='text-center'>
+										View the Contract: {laPiscina._address.slice(0, 5) + '...' + laPiscina._address.slice(38, 42)}
+									</a>
+								}
+							</Col>
+						</Row>
+
+					</section>
+				</main>
+				<footer>
+
+				</footer>
+			</div>
+		</AccountContext.Provider>
 	)
 }
 

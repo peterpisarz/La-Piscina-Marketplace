@@ -1,7 +1,7 @@
 import logo from '../images/HStC_Logo_788x747.png'
 import WalletModal from './Modal'
 
-const Navbar = ({ web3Handler, account, removeAccount, setAccount }) => {
+const Navbar = ({ web3Handler, accounts, setAccount }) => {
 
 
     return (
@@ -16,12 +16,10 @@ const Navbar = ({ web3Handler, account, removeAccount, setAccount }) => {
                 <img src={logo} className="App-logo" alt="logo" />
                 Holly St Crypto
             </a>
-
             
             <WalletModal 
                 web3Handler={web3Handler}
-                removeAccount={removeAccount}
-                account={account}
+                account={accounts}
                 setAccount={setAccount}
             />
         </nav>

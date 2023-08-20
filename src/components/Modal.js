@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useWeb3React } from "@web3-react/core"
@@ -6,17 +6,34 @@ import { connectors } from './Connectors'
 import metamaskIcon from '../images/metamask-icon.webp'
 import coinbaseIcon from '../images/coinbase icon.jpg'
 import walletConnectIcon from '../images/wallet-connect icon.png'
+import AccountContext from './AccountContext';
 
 function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-function WalletModal({ web3Handler, removeAccount, accounts, setAccount }) {
-  const { activate, account } = useWeb3React();
+function WalletModal({ web3Handler, accounts, setAccount }) {
+  const { isError, setIsError, message, setMessage } = useContext(AccountContext);
+  const { activate, deactivate, account, active, chainId } = useWeb3React();
   const [show, setShow] = useState(false);
 
+  useEffect(() => {
+    if(account){
+      setAccount(account);
+    }
+  }, [account, setAccount]);
+
+  useEffect(() => {
+    if (chainId === 11155111) { // Sepolia chainId
+      setIsError(true);
+    } else {
+      setMessage("Switch your network to Sepolia in your wallet");
+    }
+  }, [chainId]);
+
   const handleDisconnect = () => {
-    removeAccount()
+    deactivate()
+    setIsError(true)
   };
   const handleClose = () => {
     setShow(false)
@@ -25,17 +42,28 @@ function WalletModal({ web3Handler, removeAccount, accounts, setAccount }) {
     setShow(true)
   };
 
-  const handleMetamaskConnect = () => {
+  const handleMetamaskConnect = async () => {
       if (isMobileDevice()) {
           window.open('https://metamask.app.link/dapp/la-piscina.on.fleek.co');
           return;
       }
       
-      activate(connectors.injected);
+      await activate(connectors.injected);
       handleClose();
-      setAccount(account)
+      setIsError(false)
   };
 
+const handleCoinbaseConnect = async () => {
+    try {
+        await activate(connectors.coinbaseWallet);
+        handleClose();
+        setIsError(false);
+    } catch (error) {
+        console.error("Failed to activate Coinbase Wallet:", error);
+        setIsError(true);
+
+    }
+};
 
   return (
     <>
@@ -53,7 +81,6 @@ function WalletModal({ web3Handler, removeAccount, accounts, setAccount }) {
                 >
                     Connect Wallet
                 </button>
-                
             )}
 
       <Modal
@@ -83,10 +110,7 @@ function WalletModal({ web3Handler, removeAccount, accounts, setAccount }) {
         
             <Button 
               variant="outline-light"
-              onClick={() => {
-              activate(connectors.coinbaseWallet)
-              handleClose()
-              }}
+              onClick={handleCoinbaseConnect}
               style={{
                 width: '300px',
                 border: '1px solid #333',
@@ -103,6 +127,7 @@ function WalletModal({ web3Handler, removeAccount, accounts, setAccount }) {
               variant="outline-light"
               onClick={() => {
               activate(connectors.walletConnect)
+              setIsError(false)
               handleClose()
               }}
               style={{
