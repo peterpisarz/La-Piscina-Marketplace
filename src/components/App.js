@@ -45,6 +45,16 @@ function App() {
 
 	const [reloadFlag, setReloadFlag] = useState(false)
 
+	if (networkId !== 11155111) {
+		window.ethereum.request({
+			method: 'wallet_switchEthereumChain',
+			params: [{ chainId: "0xaa36a7" }],
+		})
+	}
+	window.ethereum.on('chainChanged', () => {
+		window.location.reload()
+})
+
 	const loadBlockchainData = async (_web3, _account, _networkId) => {
 		// Fetch Contract, Data, etc.
 		try {
